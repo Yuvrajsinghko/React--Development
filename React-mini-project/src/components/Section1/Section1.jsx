@@ -2,7 +2,9 @@ import React from 'react'
 
 const Section1 = () => {
   return (
-    <div>Section1</div>
+    <div className='h-screen w-screen bg-amber-700'>
+      <h1>Section1</h1>
+    </div>
   )
 }
 
