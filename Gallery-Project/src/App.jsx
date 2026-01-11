@@ -22,7 +22,7 @@ const App = () => {
     };
     getData()
   }, [index]);
-  let printUserData = "No User Available";
+  let printUserData =<h1 className="text-5xl font-extrabold text-amber-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">Loading.....</h1> ;
 
   if (userData.length > 0) {
     printUserData = userData.map((item, idx) => {
@@ -43,26 +43,30 @@ const App = () => {
     });
   }
   return (
-    <div className="bg-black min-h-screen p-4 ">
+    <div className="bg-black h-[120vh] p-4 ">
       <h1 className="fixed text-7xl text-amber-500">{index}</h1>
-      <div className="flex flex-wrap gap-5 p-30 text-teal-400">
+      <div className="flex h-[80%] flex-wrap gap-5 p-30 text-teal-400 mb-12">
         {printUserData}
       </div>
 
       <div className="flex justify-center text-5xl gap-20 items-center">
         <button
+        style={{opacity:index ===1?0.5:1}}
           onClick={() => {
             if (index > 1) {
               setIndex(index - 1);
+              setUserData([])
             }
           }}
           className="border-2 rounded-3xl p-2 text-amber-200 bg-neutral-700 cursor-pointer active:scale-95"
         >
           Prev
         </button>
+        <h4 className="text-2xl font-extrabold text-amber-600">Page {index}</h4>
         <button
           onClick={() => {
             setIndex(index + 1);
+            setUserData([])
           }}
           className="border-2 rounded-3xl p-2 text-amber-200 bg-neutral-700 cursor-pointer active:scale-95"
         >
