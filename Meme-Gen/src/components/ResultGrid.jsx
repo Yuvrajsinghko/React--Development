@@ -1,11 +1,48 @@
-import {fetchPhotos,fetchVideos,fetchGIF} from '../api/mediaApi'
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPhotos, fetchVideos, fetchGIFs } from "../api/mediaApi";
 
-import {setQuery,setLoading,setError,setResults } from '../redux/features/searchSlice'
+import {
+  setQuery,
+  setLoading,
+  setError,
+  setResults,
+} from "../redux/features/searchSlice";
+import { useEffect } from "react";
 
 const ResultGrid = () => {
-  return (
-    <div>ResultGrid</div>
-  )
-}
+  const { query, activeTab, results, loading, error } = useSelector(
+    (store) => store.search
+  );
 
-export default ResultGrid
+  useEffect(
+    function () {
+      const getData = async () => {
+        let data;
+        if (activeTab == "photos") {
+          let response = await fetchPhotos(query);
+          data=response.results
+
+        }
+        if (activeTab == "videos") {
+          let response = await fetchVideos(query);
+          data=response.videos
+        }
+        if (activeTab == "gif") {
+          let response = await fetchGIFs(query);
+          data=response.data
+        }
+        console.log(data);
+        
+      };
+      getData();
+    },
+    [query, activeTab]
+  );
+  return (
+    <div>
+      <button>Get Data</button>
+    </div>
+  );
+};
+
+export default ResultGrid;
